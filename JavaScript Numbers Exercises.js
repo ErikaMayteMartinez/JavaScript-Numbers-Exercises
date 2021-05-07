@@ -50,3 +50,40 @@ allPrimeLessThanN(15);
 //prints 2,3,5,7,11,13
 //Time Complexity: O(nsqrt(n))
 //isPrime with a time complexity of O(sqrt(n)) runs n times
+
+
+
+//Check for a set of prime factors
+//divide the number by the divisors (2,3,5) until it cannot be divided anymore
+function maxDivide (number, divisor) {
+    while (number % divisor == 0) {
+        number /= divisor;
+    }
+    return number;
+}
+
+function isUgly (number) {
+    number = maxDivide(number, 2);
+    number = maxDivide(number, 3);
+    number = maxDivide(number, 5);
+    return number ===1;
+}
+//iterate this over n, and now the list of ugly numbers can be returned
+function arrayNUglyNumbers (n) {
+    var counter = 0, currentNumber = 1,
+    uglyNumbers = [];
+
+    while (counter != n) {
+
+        if (isUgly(currentNumber)) {
+            counter++;
+            uglyNumbers.push(currentNumber);
+        }
+        currentNumber++;
+    }
+    return uglyNumbers;
+}
+//Time Complexity for maxDivide(number, divisor): O(log_divisor(number))
+//Time Complexity for isUgly: O(log_2(n))
+//Time COmplexity for arrayNUglyNumbers: O(n(log_2(n)))
+//Note that the "_" is for subscript characters above.
